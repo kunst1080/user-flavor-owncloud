@@ -5,6 +5,10 @@ set -eu
 fetch -o /tmp/ http://download.owncloud.org/community/owncloud-7.0.4.tar.bz2
 bzip2 -dc /tmp/owncloud-*.tar.bz2 | tar xvf - -C /usr/local/www/
 
+mkdir -p /data
+chown www:www /data
+ln -s /data /usr/local/www/owncloud/data
+
 FILE=/usr/local/etc/apache24/httpd.conf
 cp $FILE ${FILE}.org
 sed "s/#ServerName www.example.com:80/ServerName `hostname`/" ${FILE}.org > $FILE
